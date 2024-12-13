@@ -111,6 +111,8 @@ else:
         }
     }
 
+# DATABASES["default"]= dj_database_url.parse("postgresql://realtorcorner_db_user:X45axnIIS3p273ZatRq9CflaFa1vBsNy@dpg-ctcdd4i3esus73beasr0-a.oregon-postgres.render.com/realtorcorner_db")
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -154,7 +156,20 @@ MEDIA_URL = 'media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# STORAGES = {
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
+
+
 STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "OPTIONS": {
+            "location": MEDIA_ROOT,
+        },
+    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
