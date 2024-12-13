@@ -27,6 +27,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY = os.environ.get("SECRET_KEY",'')
 SECRET_KEY = config("SECRET_KEY")
 
+# to create a super user for render db - default values can be added after a , if needed
+SUPERUSER_USERNAME = config('DJANGO_SUPERUSER_USERNAME')
+SUPERUSER_EMAIL = config('DJANGO_SUPERUSER_EMAIL')
+SUPERUSER_PASSWORD = config('DJANGO_SUPERUSER_PASSWORD')
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "True") == "True"
 
