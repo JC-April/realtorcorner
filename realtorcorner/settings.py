@@ -15,6 +15,8 @@ from datetime import timedelta
 import os
 import dj_database_url
 from decouple import config
+# from storages.backends.s3boto3 import S3Boto3Storage
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -174,17 +176,51 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # }
 
 
+# STORAGES = {
+#     "default": {
+#         "BACKEND": "django.core.files.storage.FileSystemStorage",
+#         "OPTIONS": {
+#             "location": MEDIA_ROOT,
+#         },
+#     },
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
+
+
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-        "OPTIONS": {
-            "location": MEDIA_ROOT,
-        },
+        "BACKEND": "storages.backends.s3.S3Storage",
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+
+
+# STORAGES = {
+#     "default": {
+#         "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+#         # "OPTIONS": {
+#         #     "bucket_name": config("AWS_STORAGE_BUCKET_NAME"),
+#         #     "custom_domain": f"{config('AWS_STORAGE_BUCKET_NAME')}.s3.amazonaws.com",
+#         # },
+#     },
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
+
+
+AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME")
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+# prevent file with same name from overwritting an existing one
+AWS_S3_FILE_OVERWRITE = False
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
