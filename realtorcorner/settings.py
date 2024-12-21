@@ -26,7 +26,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.environ.get("SECRET_KEY",'')
 SECRET_KEY = config("SECRET_KEY")
 
 # to create a super user for render db - default values can be added after a , if needed
@@ -119,9 +118,6 @@ else:
         }
     }
 
-# DATABASES["default"]= dj_database_url.parse("postgresql://realtorcorner_db_user:X45axnIIS3p273ZatRq9CflaFa1vBsNy@dpg-ctcdd4i3esus73beasr0-a.oregon-postgres.render.com/realtorcorner_db")
-
-
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -160,33 +156,10 @@ STATIC_URL = 'static/'
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# handle react static files
-# STATICFILES_DIRS = [
-#     BASE_DIR / "frontend/build/static"
-# ]
 
 MEDIA_URL = 'media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# STORAGES = {
-#     "staticfiles": {
-#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-#     },
-# }
-
-
-# STORAGES = {
-#     "default": {
-#         "BACKEND": "django.core.files.storage.FileSystemStorage",
-#         "OPTIONS": {
-#             "location": MEDIA_ROOT,
-#         },
-#     },
-#     "staticfiles": {
-#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-#     },
-# }
 
 
 STORAGES = {
@@ -198,20 +171,6 @@ STORAGES = {
     },
 }
 
-
-
-# STORAGES = {
-#     "default": {
-#         "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
-#         # "OPTIONS": {
-#         #     "bucket_name": config("AWS_STORAGE_BUCKET_NAME"),
-#         #     "custom_domain": f"{config('AWS_STORAGE_BUCKET_NAME')}.s3.amazonaws.com",
-#         # },
-#     },
-#     "staticfiles": {
-#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-#     },
-# }
 
 
 AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
@@ -227,12 +186,12 @@ AWS_S3_FILE_OVERWRITE = False
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:3000",
-#     "https://myrealtorcorner.onrender.com"
-# ]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "https://myrealtorcorner.onrender.com"
+]
 
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_ALL_ORIGINS = True
 
 
 
